@@ -70,13 +70,15 @@ class Stack:
             raise TimeoutError('NATS startup timed out')
         for name, module_args in [('router', ['app.router']), ('ag-b', ['app.agent', 'ag-b'])]:
             self.start(name, [sys.executable, '-u', '-m', *module_args])
-        for _ in range(50):
+        # 5s was too tight on a cold/slow host: the Router may retry JetStream setup before
+        # falling back to Core NATS. Allow 15s and name the processes that are still starting.
+        for _ in range(150):
             if all(b'ready' in (self.evidence/f'{name}.log').read_bytes()[self.offsets[name]:] for name in ['router', 'ag-b']):
                 return
             if any(p.poll() is not None for p in self.children.values()):
                 raise RuntimeError('Stack process exited; inspect logs')
             time.sleep(.1)
-        raise TimeoutError('Stack startup timed out')
+        raise TimeoutError('Stack startup timed out; inspect router.log and ag-b.log')
 
 if __name__ == '__main__':
     # Deployed default: durable dispatch through JetStream (the rendered nats.conf
