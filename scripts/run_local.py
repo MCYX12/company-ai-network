@@ -82,7 +82,10 @@ if __name__ == '__main__':
     # Deployed default: durable dispatch through JetStream (the rendered nats.conf
     # enables it). Set POC_JETSTREAM=0 to force Core NATS.
     os.environ.setdefault('POC_JETSTREAM', '1')
-    stack = Stack(port=int(os.environ.get('POC_PORT', '14222')))
+    port = int(os.environ.get('POC_PORT', '14222'))
+    # Router/Agent subprocesses inherit this; keep them on the same port as the local NATS.
+    os.environ.setdefault('NATS_URL', f'tls://localhost:{port}')
+    stack = Stack(port=port)
     def shutdown(*_):
         raise KeyboardInterrupt
     signal.signal(signal.SIGTERM, shutdown)
