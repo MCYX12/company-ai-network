@@ -40,6 +40,14 @@ POC_RUNTIME=.runtime NATS_URL="$(cat .runtime/endpoint.txt)" \
 
 打开 <http://127.0.0.1:8787>。
 
+如 14222 已被占用，可以换端口（bootstrap 与 run_local 必须一致）：
+
+```bash
+.venv/bin/python scripts/bootstrap.py --listen 14223
+POC_PORT=14223 .venv/bin/python scripts/run_local.py
+NATS_URL=tls://localhost:14223 .venv/bin/python -m app.client --list
+```
+
 ## 局域网部署
 
 1. 准备 NATS 二进制和运行目录：
@@ -48,19 +56,20 @@ POC_RUNTIME=.runtime NATS_URL="$(cat .runtime/endpoint.txt)" \
 .venv/bin/python scripts/prepare_server.py
 ```
 
-2. 使用站点 profile 生成 LAN 运行时（示例地址 `192.0.2.10`）：
+2. 生成演示 LAN 运行时与 ag-b 私钥包（示例地址 `192.0.2.10`）：
 
 ```bash
-.venv/bin/python scripts/render_site.py --site config/site.example.json \
-  --runtime .runtime-lan --nats-conf .runtime-lan/nats.conf --listen 192.0.2.10:14222
 .venv/bin/python scripts/prepare_lan.py --ip 192.0.2.10
 ```
 
-3. 启动：
+3. 按站点 profile 核对项目/身份/证书后启动 Ubuntu 侧：
 
 ```bash
+.venv/bin/python scripts/render_site.py --site config/site.example.json --check
 .venv/bin/python scripts/run_lan.py
 ```
+
+> `prepare_lan.py` 生成的是演示运行时；生产站点应替换 CA、身份名册和 NATS 证书，不能直接使用演示密钥。
 
 4. 用 systemd 托管（模板在 `packaging/systemd/`）：
 

@@ -49,6 +49,7 @@ def main(listen=14222):
                       'ca_file': str(certs/'ca.crt'), 'verify_and_map': True},
               'accounts': {'POC': {'users': users}}}
     (RUNTIME/'nats.conf').write_text(json.dumps(config, indent=2, ensure_ascii=False))
+    (RUNTIME/'endpoint.txt').write_text(f'tls://127.0.0.1:{listen}\n')
     # Local test identities are explicit fixtures; enterprise enrollment starts empty.
     shutil.copy2(ROOT/'tests/fixtures/registry.demo.json', RUNTIME/'registry.json')
     print('Generated local-only mTLS PoC configuration, 7-day test certificates.')
