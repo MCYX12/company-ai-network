@@ -54,4 +54,7 @@ def main(listen=14222):
     print('Generated local-only mTLS PoC configuration, 7-day test certificates.')
 
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--listen', type=int, default=14222)
+    main(parser.parse_args().listen)

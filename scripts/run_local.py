@@ -82,7 +82,7 @@ if __name__ == '__main__':
     # Deployed default: durable dispatch through JetStream (the rendered nats.conf
     # enables it). Set POC_JETSTREAM=0 to force Core NATS.
     os.environ.setdefault('POC_JETSTREAM', '1')
-    stack = Stack()
+    stack = Stack(port=int(os.environ.get('POC_PORT', '14222')))
     def shutdown(*_):
         raise KeyboardInterrupt
     signal.signal(signal.SIGTERM, shutdown)
