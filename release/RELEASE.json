@@ -26,7 +26,7 @@
     "name": "company-agent-offline",
     "digest": null
   },
-  "git_commit": "27e46b6",
+  "git_commit": "66cc27f",
   "source_sha256": {
     ".dockerignore": "029c01f1bef5e584a3aedb601f7cf92eb51a2871239ce16ef3f6a03d246b20e2",
     ".github/workflows/ci.yml": "e0386b84f6643bab7614442ae45eda0d81288b9945a510f1ef69e0221e529481",
@@ -218,7 +218,7 @@
     "scripts/run_auto_renew.sh": "a2ce9e5a27f9f1425ce04940ff321a6493fb7b75d4c8956b8f5ede25d1ed9197",
     "scripts/run_healthcheck.sh": "3e368e75a8a5706f66613ee9d6c399cbf53565ae61b95c65a07a950f9dabcf3a",
     "scripts/run_lan.py": "1f2277cec83448f7ff147c3577af89413ae9fdc2f831449c4e54168c38ef7cfc",
-    "scripts/run_local.py": "a5f8f7a0d0034b830e65ef5cf74f0a9cbfdcd07124b2c823de49e9ac958f4796",
+    "scripts/run_local.py": "a503862f75993dca0480da5a8446d0e3b550861f4f1b4efc39bc4ad1637c4017",
     "scripts/run_ocsp_responder.sh": "2926a2ab09c730750ce59113af3f42c1cf1538345e887f3536e48245623d2b01",
     "scripts/run_record_refresh.sh": "32d05b1cf98a831ee82de1aa1a87a33ca18751e95a8ca7663891dd0732206901",
     "scripts/runtime_backup.py": "71a049b1a52aac2801399d034730c50bbd6c564ff59efeba36170e2fc9b8d437",
