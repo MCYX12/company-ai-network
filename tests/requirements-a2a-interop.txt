@@ -1,0 +1,7 @@
+# Drill-only dependencies for tests/a2a_interop_drill.py.
+# Install into a SEPARATE virtualenv; never into the project's .venv:
+#   python3 -m venv .venv-a2a
+#   .venv-a2a/bin/pip install -r tests/requirements-a2a-interop.txt
+#
+# Official A2A Python SDK. Base package only -- do NOT install the [all] extra.
+a2a-sdk==1.2.1

@@ -1,0 +1,30 @@
+{
+  "vlan": "A",
+  "name": "预试点双 VLAN 验收样例（替换为现场地址）",
+  "probes": [
+    {
+      "host": "192.168.1.20",
+      "port": 14222,
+      "expect": "open",
+      "note": "VLAN A 内，消息服务器应可达"
+    },
+    {
+      "host": "192.168.1.20",
+      "port": 2560,
+      "expect": "blocked",
+      "note": "OCSP responder 只应本机访问"
+    },
+    {
+      "host": "192.168.120.20",
+      "port": 14222,
+      "expect": "blocked",
+      "note": "VLAN B 不应访问消息服务器（现场替换地址）"
+    },
+    {
+      "host": "192.168.120.20",
+      "port": 22,
+      "expect": "open",
+      "note": "VLAN B 设备自身管理口（替换/删除）"
+    }
+  ]
+}

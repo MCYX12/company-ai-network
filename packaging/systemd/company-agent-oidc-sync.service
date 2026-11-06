@@ -1,0 +1,13 @@
+[Unit]
+Description=Company Agent OIDC identity sync (one-shot; template, disabled by default)
+
+[Service]
+Type=oneshot
+# systemd expands %h in Environment= (but NOT inside an EnvironmentFile). The file below may
+# override these defaults with absolute paths; scripts/install_oidc_timer.sh generates a
+# ready-to-use file for the current home directory.
+Environment=POC_ROOT=%h/桌面/ai/company-ai-network
+Environment=POC_RUNTIME=%h/桌面/ai/company-ai-network/.runtime-lan
+Environment=POC_OIDC_TOKEN_DIR=%h/.config/company-agent/oidc-tokens
+EnvironmentFile=-%h/.config/company-agent/oidc-sync.env
+ExecStart=/bin/bash -lc 'cd "$POC_ROOT" && .venv/bin/python -m scripts.oidc_sync_runner --runtime "$POC_RUNTIME" --token-dir "$POC_OIDC_TOKEN_DIR" --apply'

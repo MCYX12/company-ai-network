@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.companyagent.forwarder</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/mac/Library/Application Support/CompanyAgent/scripts/local_forwarder.py</string>
+    <string>--host</string><string>192.168.1.20</string>
+    <string>--port</string><string>14222</string>
+    <string>--listen-port</string><string>14223</string>
+    <string>--iface</string><string>en0</string>
+    <string>--iface</string><string>en1</string>
+    <string>--iface</string><string>utun7</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/mac/Library/Application Support/CompanyAgent</string>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>ThrottleInterval</key><integer>5</integer>
+  <key>StandardOutPath</key><string>/Users/mac/Library/Application Support/CompanyAgent/forwarder.log</string>
+  <key>StandardErrorPath</key><string>/Users/mac/Library/Application Support/CompanyAgent/forwarder.err.log</string>
+</dict>
+</plist>

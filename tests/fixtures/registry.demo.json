@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "agents": [
+    {"agent_id":"ag-a","device_id":"ubuntu-demo","employee_id":"demo-a","tool":"fixture","projects":["demo-project"],"enabled":true},
+    {"agent_id":"ag-b","device_id":"mac-demo","employee_id":"demo-b","tool":"fixture","projects":["demo-project"],"enabled":true},
+    {"agent_id":"ag-c","device_id":"private-demo","employee_id":"demo-c","tool":"fixture","projects":["private-project"],"enabled":true}
+  ]
+}

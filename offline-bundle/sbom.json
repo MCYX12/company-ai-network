@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "generated_at": "2026-10-10T10:22:35.725142+00:00",
+  "python": "3.11.15",
+  "components": [
+    {
+      "name": "attrs",
+      "version": "26.1.0",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.2",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.25.1",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "nats-py",
+      "version": "2.12.0",
+      "license": "Apache 2 License"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.6.3",
+      "license": "UNKNOWN"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "UNKNOWN"
+    }
+  ],
+  "nats_server": {
+    "version": "nats-server: v2.11.9",
+    "sha256": "da17f1e330bcfc9790c7a2fc26ae150700edb1a1fa36fe1cb7a0e95af7595bb0"
+  },
+  "docker_image": {
+    "name": "company-agent-offline",
+    "digest": "company-agent-offline@sha256:593f69c586da9c0e1725cd94ffba30eb0d37c73b6f3f3e2e38eec14052822426"
+  },
+  "artifacts": {
+    "pyproject.toml": {
+      "path": "pyproject.toml",
+      "sha256": "7a3e820bb49f9cccfbc9a4ef5b7de300c0bce70f0fcd6d7cd00f4f2b1233134a"
+    },
+    "offline Dockerfile": {
+      "path": "offline-bundle/Dockerfile",
+      "sha256": "085ce8c969913a2425cd6d961c9fc6aefebf33aa5af108b186d14729c5e17ee8"
+    },
+    "nats-server": {
+      "path": ".runtime/bin/nats-server",
+      "sha256": "da17f1e330bcfc9790c7a2fc26ae150700edb1a1fa36fe1cb7a0e95af7595bb0"
+    },
+    "offline manifest": {
+      "path": "offline-bundle/manifest.json",
+      "sha256": "85f63c7bc1a153136bccde7862f51232f7bbb8ba340bbb775079cac74bfaaa16"
+    },
+    "site example": {
+      "path": "config/site.example.json",
+      "sha256": "4979a6f8f6802ad11ecd48356b6fc7c0a5c6243fe0c375925cbadb6bf42a24f2"
+    }
+  }
+}

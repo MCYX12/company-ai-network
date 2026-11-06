@@ -1,0 +1,5 @@
+[project]
+name = "company-ai-network"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["nats-py==2.12.0", "jsonschema==4.25.1", "cryptography>=42"]

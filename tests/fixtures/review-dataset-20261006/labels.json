@@ -1,0 +1,167 @@
+{
+  "note": "author-provided test labels (private); not business sign-off",
+  "docs": [
+    {
+      "file": "01_short.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "把内部问答迁移到公司内网",
+          "lines": [
+            2
+          ],
+          "level": "documented"
+        },
+        {
+          "id": "f2",
+          "text": "当前处于设计阶段，尚未开始开发",
+          "lines": [
+            3
+          ],
+          "level": "documented"
+        }
+      ]
+    },
+    {
+      "file": "02_long_tail.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "实测显示迁移后 P50 从 6 秒降到 3.5 秒",
+          "lines": [
+            33
+          ],
+          "level": "measured"
+        }
+      ]
+    },
+    {
+      "file": "03_table.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "M1 里程碑日期是 2026-11-30",
+          "lines": [
+            4
+          ],
+          "level": "planned"
+        },
+        {
+          "id": "f2",
+          "text": "M2 里程碑日期是 2026-12-31",
+          "lines": [
+            5
+          ],
+          "level": "planned"
+        }
+      ]
+    },
+    {
+      "file": "04_history.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "v1 于 2026-08-01 完成通信打通",
+          "lines": [
+            2
+          ],
+          "level": "documented"
+        },
+        {
+          "id": "f2",
+          "text": "v2 于 2026-09-15 完成审批界面",
+          "lines": [
+            3
+          ],
+          "level": "documented"
+        }
+      ]
+    },
+    {
+      "file": "05_conflict.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "文档声明企业 IAM 已完成",
+          "lines": [
+            2
+          ],
+          "level": "declared"
+        },
+        {
+          "id": "f2",
+          "text": "实测记录显示企业 IAM 尚未完成",
+          "lines": [
+            3
+          ],
+          "level": "measured"
+        }
+      ]
+    },
+    {
+      "file": "06_nofacts.md",
+      "facts": [],
+      "allow_empty": true
+    },
+    {
+      "file": "07_numbers.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "项目预算 120 万元",
+          "lines": [
+            2
+          ],
+          "level": "documented"
+        },
+        {
+          "id": "f2",
+          "text": "交付日期为 2026-12-31",
+          "lines": [
+            2
+          ],
+          "level": "planned"
+        }
+      ]
+    },
+    {
+      "file": "08_code.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "示例函数返回两个参数之和",
+          "lines": [
+            6
+          ],
+          "level": "documented"
+        }
+      ]
+    },
+    {
+      "file": "09_upgrade_trap.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "计划在 2026 年 Q4 完成企业 IAM 接入",
+          "lines": [
+            2
+          ],
+          "level": "planned"
+        }
+      ]
+    },
+    {
+      "file": "10_boilerplate.md",
+      "facts": [
+        {
+          "id": "f1",
+          "text": "系统当前支持 7 个身份在线",
+          "lines": [
+            28
+          ],
+          "level": "measured"
+        }
+      ]
+    }
+  ]
+}

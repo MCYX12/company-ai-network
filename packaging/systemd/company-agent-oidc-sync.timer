@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the Company Agent OIDC identity sync periodically (template, disabled by default)
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Persistent=false
+
+[Install]
+WantedBy=timers.target

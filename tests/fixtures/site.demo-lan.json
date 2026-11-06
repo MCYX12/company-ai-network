@@ -1,0 +1,128 @@
+{
+  "org": {
+    "id": "demo",
+    "name": "Demo Org"
+  },
+  "prefix": "corp.dev.v1",
+  "server": {
+    "address": "192.168.1.20",
+    "nats_port": 14222,
+    "ocsp_port": 2560,
+    "dashboard_port": 8787,
+    "dashboard_identity": "ag-a"
+  },
+  "ca": {
+    "subject_prefix": "PoC",
+    "ocsp_url": "http://127.0.0.1:2560"
+  },
+  "defaults": {
+    "caller": "ag-a",
+    "target": "ag-b",
+    "project": "demo-project"
+  },
+  "projects": [
+    {
+      "id": "demo-project",
+      "name": "Demo Project"
+    },
+    {
+      "id": "private-project",
+      "name": "Private Demo Project"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "ag-a",
+      "device_id": "ubuntu-demo",
+      "employee_id": "demo-a",
+      "tool": "dsh-harness",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true,
+      "capabilities": [
+        "get_status",
+        "ask_peer",
+        "get_project_progress"
+      ]
+    },
+    {
+      "agent_id": "ag-b",
+      "device_id": "mac-demo",
+      "employee_id": "demo-b",
+      "tool": "fixture",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "ag-c",
+      "device_id": "private-demo",
+      "employee_id": "demo-c",
+      "tool": "fixture",
+      "projects": [
+        "private-project"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "mac-codex-01",
+      "device_id": "mac-demo",
+      "employee_id": "demo-b",
+      "tool": "codex",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "mac-claude-code-01",
+      "device_id": "mac-demo",
+      "employee_id": "demo-b",
+      "tool": "claude-code",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "mac-hermes-01",
+      "device_id": "mac-demo",
+      "employee_id": "demo-b",
+      "tool": "hermes",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "ubuntu-harness-01",
+      "device_id": "ubuntu-demo",
+      "employee_id": "demo-a",
+      "tool": "dsh-harness",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true,
+      "capabilities": [
+        "get_status",
+        "ask_peer"
+      ]
+    },
+    {
+      "agent_id": "mac-harness-01",
+      "device_id": "mac-demo",
+      "employee_id": "demo-b",
+      "tool": "dsh-harness",
+      "projects": [
+        "demo-project"
+      ],
+      "enabled": true,
+      "capabilities": [
+        "get_status",
+        "ask_peer"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "dataset_id": "review-dataset-20261006",
+  "model": "qwen3.5:9b",
+  "docs": [
+    {
+      "name": "01_short.md",
+      "sha256": "fcf182157545f574622938b4112032cb",
+      "lines": 3
+    },
+    {
+      "name": "02_long_tail.md",
+      "sha256": "bd70491b47dccaae91afce32a7f2b7a8",
+      "lines": 33
+    },
+    {
+      "name": "03_table.md",
+      "sha256": "789d015dc60fb390a63f701ce88eb9df",
+      "lines": 5
+    },
+    {
+      "name": "04_history.md",
+      "sha256": "4ce63be8f7598fdc4429bc16941b236d",
+      "lines": 3
+    },
+    {
+      "name": "05_conflict.md",
+      "sha256": "a6be31433ad20b431176f8f6af0302fa",
+      "lines": 3
+    },
+    {
+      "name": "06_nofacts.md",
+      "sha256": "d7bc5ecfe5171589627d4f27e63814e8",
+      "lines": 3
+    },
+    {
+      "name": "07_numbers.md",
+      "sha256": "9dac2ff308c74ee0f125d54b7ecd112d",
+      "lines": 2
+    },
+    {
+      "name": "08_code.md",
+      "sha256": "d09f41f4028381d38a46a39f59c3bece",
+      "lines": 7
+    },
+    {
+      "name": "09_upgrade_trap.md",
+      "sha256": "1e55f3a0964eb576753df5ac0884d974",
+      "lines": 3
+    },
+    {
+      "name": "10_boilerplate.md",
+      "sha256": "e7b3fd9ca91b375610908c2e333d7cb7",
+      "lines": 28
+    }
+  ],
+  "labels_sha256": "c40ad96b258a0650e82fa469f05a4758",
+  "scope": "synthetic test documents only; safe to commit"
+}

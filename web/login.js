@@ -1,0 +1,7 @@
+'use strict';
+const $=s=>document.querySelector(s);let registering=false;
+async function call(name,body){const r=await fetch('/api/auth/'+name,{method:'POST',headers:{'Content-Type':'application/json','X-Dashboard-Token':$('meta[name="dashboard-token"]').content},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw Error(d.error||'操作失败');return d;}
+function mode(value){registering=value;$('#setup-label').classList.toggle('hidden',!value);$('#setup-help').classList.toggle('hidden',!value);$('#login-code').required=value;$('#login-submit').textContent=value?'注册管理员':'登录';$('#login-title').textContent=value?'注册管理员':'管理员登录';$('#register-switch').textContent=value?'返回登录':'使用管理员邀请注册';$('#login-password').autocomplete=value?'new-password':'current-password';}
+$('#register-switch').onclick=()=>mode(!registering);
+$('#login-form').onsubmit=async e=>{e.preventDefault();$('#login-submit').disabled=true;try{const body={name:$('#login-name').value,password:$('#login-password').value};if(registering){await call('register',{...body,code:$('#login-code').value.trim()});mode(false);$('#login-password').value='';$('#login-code').value='';$('#login-feedback').textContent='注册成功，请使用刚设置的密码登录。';}else{await call('login',body);location.assign('/#members');}}catch(e){$('#login-feedback').textContent=e.message;}finally{$('#login-submit').disabled=false;}};
+call('state',{}).then(s=>{if(s.account)location.replace('/#members');else if(!s.initialized)mode(true);}).catch(e=>$('#login-feedback').textContent=e.message);

@@ -1,0 +1,57 @@
+name: Offline checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pinned dependencies
+        run: python -m pip install --require-hashes -r requirements.lock
+
+      - name: Install pinned NATS server for integration tests
+        # A fresh clone intentionally has no runtime directory. Fetch the exact pinned
+        # NATS build and verify the committed SHA-256 before the suite uses it.
+        run: |
+          mkdir -p .runtime/bin
+          curl -fsSL -o /tmp/nats-server.tar.gz https://github.com/nats-io/nats-server/releases/download/v2.11.9/nats-server-v2.11.9-linux-amd64.tar.gz
+          tar -xzf /tmp/nats-server.tar.gz -C /tmp
+          install -m 0755 /tmp/nats-server-v2.11.9-linux-amd64/nats-server .runtime/bin/nats-server
+          echo "da17f1e330bcfc9790c7a2fc26ae150700edb1a1fa36fe1cb7a0e95af7595bb0  .runtime/bin/nats-server" | sha256sum -c -
+
+      - name: Public source check (runtime artifacts, credentials, private keys)
+        run: python -m scripts.check_public
+
+      - name: Offline regression suite
+        run: python -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Lock and packaging consistency
+        # requirements.lock must carry every runtime dependency (including cryptography for CSR
+        # flows), and the standalone client must import and expose a startup install digest.
+        run: |
+          grep -q cryptography requirements.lock
+          grep -q cryptography uv.lock
+          python -c "import app.worker_kernel, app.claude_history, app.router"
+          python -c "import importlib.util;spec=importlib.util.spec_from_file_location('w','packaging/client/worker.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);assert m.INSTALL_DIGEST, 'install_digest missing'"
+
+      - name: Release metadata gate
+        # Blocking: source-content drift, a missing baseline doc or a public-source hit fails the
+        # build. A fresh clone legitimately lacks the NATS binary/runtime, which --gate tolerates.
+        run: python -m scripts.verify_release --gate

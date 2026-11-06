@@ -1,0 +1,137 @@
+{
+  "format": 1,
+  "scope": "production",
+  "source_digest": null,
+  "environment": {
+    "kind": "field",
+    "site": null
+  },
+  "items": {
+    "E-01": {
+      "description": "Real IdP and join/move/leave lifecycle",
+      "owner": null,
+      "responsible_role": "identity",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-02": {
+      "description": "Physical HA, shared authority and partitions",
+      "owner": null,
+      "responsible_role": "platform",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-03": {
+      "description": "Real model and offline cold start",
+      "owner": null,
+      "responsible_role": "model",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-04": {
+      "description": "Authorized business data and independent quality review",
+      "owner": null,
+      "responsible_role": "business",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-05": {
+      "description": "VLAN/VPN, addressing, certificates and clock",
+      "owner": null,
+      "responsible_role": "network",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-06": {
+      "description": "Platform install/upgrade/rollback matrix",
+      "owner": null,
+      "responsible_role": "endpoint",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-07": {
+      "description": "1000 connections, 100 read-only QPS, 30 minutes",
+      "owner": null,
+      "responsible_role": "platform",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-08": {
+      "description": "Real on-call delivery, acknowledgment and escalation",
+      "owner": null,
+      "responsible_role": "operations",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-09": {
+      "description": "Independent immutable audit retention",
+      "owner": null,
+      "responsible_role": "security",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-10": {
+      "description": "Encrypted off-site full restore and production RTO/RPO",
+      "owner": null,
+      "responsible_role": "operations",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-11": {
+      "description": "50-200 employee pilot and business/security/ops sign-offs",
+      "owner": null,
+      "responsible_role": "business",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    },
+    "E-12": {
+      "description": "SLO, permissions, retention, supported versions and ownership",
+      "owner": null,
+      "responsible_role": "security",
+      "status": "pending",
+      "evidence_level": "现场验收",
+      "accepted_at": null,
+      "evidence": [],
+      "metrics": {}
+    }
+  },
+  "signoffs": {
+    "business": null,
+    "security": null,
+    "operations": null
+  },
+  "note": "Populate only from real field evidence and named responsible people; template is deliberately non-passing."
+}

@@ -1,0 +1,438 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "sender_agent_id",
+    "action",
+    "expires_at",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "message_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "sender_agent_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "target_agent_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "action": {
+      "enum": [
+        "get_status",
+        "get_project_progress",
+        "list_agents",
+        "submit_task",
+        "get_task",
+        "list_tasks",
+        "cancel_task",
+        "request_access",
+        "list_access",
+        "list_directory_requests",
+        "admin_status",
+        "admin_ca_status",
+        "admin_issue",
+        "admin_renew",
+        "admin_revoke",
+        "admin_dlq_list",
+        "admin_dlq_requeue",
+        "admin_backup",
+        "admin_offboard"
+      ]
+    },
+    "expires_at": {
+      "type": "number"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]{1,64}$"
+        },
+        "capability": {
+          "enum": [
+            "get_status",
+            "get_project_progress"
+          ]
+        },
+        "task_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "operation": {
+          "enum": [
+            "get_status",
+            "generate_text",
+            "ask_peer"
+          ]
+        },
+        "idempotency_key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "ttl_seconds": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 900
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000,
+          "pattern": "\\S"
+        },
+        "state": {
+          "enum": [
+            "accepted",
+            "dispatched",
+            "succeeded",
+            "failed",
+            "expired",
+            "cancelled"
+          ]
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "cursor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
+        },
+        "kind": {
+          "enum": [
+            "client",
+            "server",
+            "ocsp"
+          ]
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "employee": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
+        },
+        "apply": {
+          "type": "boolean"
+        }
+      }
+    },
+    "capability": {
+      "enum": [
+        "get_status",
+        "get_project_progress"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "list_agents",
+              "get_task",
+              "list_tasks",
+              "cancel_task",
+              "list_access",
+              "list_directory_requests",
+              "admin_status",
+              "admin_ca_status",
+              "admin_issue",
+              "admin_renew",
+              "admin_revoke",
+              "admin_dlq_list",
+              "admin_dlq_requeue",
+              "admin_backup",
+              "admin_offboard"
+            ]
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "target_agent_id"
+              ]
+            },
+            {
+              "required": [
+                "capability"
+              ]
+            }
+          ]
+        }
+      },
+      "else": {
+        "oneOf": [
+          {
+            "required": [
+              "target_agent_id"
+            ],
+            "not": {
+              "required": [
+                "capability"
+              ]
+            }
+          },
+          {
+            "required": [
+              "capability"
+            ],
+            "not": {
+              "required": [
+                "target_agent_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "submit_task"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "target_agent_id"
+        ],
+        "not": {
+          "required": [
+            "capability"
+          ]
+        },
+        "properties": {
+          "payload": {
+            "required": [
+              "operation",
+              "idempotency_key",
+              "ttl_seconds"
+            ],
+            "properties": {
+              "operation": {
+                "enum": [
+                  "get_status",
+                  "generate_text",
+                  "ask_peer"
+                ]
+              },
+              "idempotency_key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "ttl_seconds": {
+                "type": "integer",
+                "minimum": 5,
+                "maximum": 900
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000,
+                "pattern": "\\S"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1200
+              }
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "operation": {
+                      "const": "generate_text"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "prompt"
+                  ]
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "prompt"
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "operation": {
+                      "const": "ask_peer"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "question"
+                  ]
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "question"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "get_task",
+              "cancel_task"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "required": [
+              "task_id"
+            ],
+            "properties": {
+              "task_id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "list_tasks"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "accepted",
+                  "dispatched",
+                  "succeeded",
+                  "failed",
+                  "expired",
+                  "cancelled"
+                ]
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 50
+              },
+              "cursor": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9223372036854775807
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "request_access",
+              "list_access"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "maxProperties": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "request_access"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "target_agent_id"
+        ],
+        "not": {
+          "required": [
+            "capability"
+          ]
+        }
+      }
+    }
+  ]
+}

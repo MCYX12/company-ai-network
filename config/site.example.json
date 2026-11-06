@@ -1,0 +1,66 @@
+{
+  "org": {
+    "id": "acme",
+    "name": "Acme 公司"
+  },
+  "prefix": "acme.dev.v1",
+  "server": {
+    "address": "192.0.2.40",
+    "nats_port": 14222,
+    "ocsp_port": 2560,
+    "dashboard_port": 8787,
+    "dashboard_identity": "admin-01"
+  },
+  "ca": {
+    "subject_prefix": "Acme",
+    "ocsp_url": "http://127.0.0.1:2560"
+  },
+  "defaults": {
+    "caller": "pc-hr-01",
+    "target": "pc-dev-01",
+    "project": "project-alpha"
+  },
+  "projects": [
+    {
+      "id": "project-alpha",
+      "name": "Project Alpha"
+    },
+    {
+      "id": "project-beta",
+      "name": "Project Beta"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "pc-dev-01",
+      "device_id": "pc-dev-01",
+      "employee_id": "emp-1001",
+      "tool": "claude-code",
+      "projects": [
+        "project-alpha"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "pc-hr-01",
+      "device_id": "pc-hr-01",
+      "employee_id": "emp-1002",
+      "tool": "fixture",
+      "projects": [
+        "project-beta"
+      ],
+      "enabled": true
+    },
+    {
+      "agent_id": "pc-fin-01",
+      "device_id": "pc-fin-01",
+      "employee_id": "emp-1003",
+      "tool": "codex",
+      "projects": [
+        "project-alpha",
+        "project-beta"
+      ],
+      "enabled": true
+    }
+  ]
+}

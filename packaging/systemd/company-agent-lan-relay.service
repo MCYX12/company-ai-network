@@ -1,0 +1,18 @@
+[Unit]
+Description=Company Agent physical LAN reverse relay to Windows
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=<repository>
+ExecStart=<python> -m scripts.lan_reverse_relay --config <relay-config>
+Restart=always
+RestartSec=5
+TimeoutStopSec=10
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

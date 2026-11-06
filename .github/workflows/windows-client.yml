@@ -1,0 +1,42 @@
+name: Windows offline client
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+env:
+  # Windows Python defaults to the ANSI code page; source and evidence are UTF-8.
+  PYTHONUTF8: "1"
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Preserve source hash bytes on Windows
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pinned runtime dependencies
+        run: python -m pip install --require-hashes -r requirements.lock
+      - name: Parse every delivered PowerShell script
+        shell: pwsh
+        run: |
+          Get-ChildItem scripts,packaging/windows -Filter *.ps1 -Recurse | ForEach-Object {
+            $tokens=$null; $parseErrors=$null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$parseErrors) | Out-Null
+            if($parseErrors.Count){throw ($_.Name+': '+($parseErrors.Message -join '; '))}
+          }
+      - name: Portable client and failure paths
+        run: python -m unittest tests.test_package_trust tests.test_client_installer tests.test_client_upgrade tests.test_native_work tests.test_client_worker_queries tests.test_client_worker_doctor tests.test_windows_assets tests.test_worker_supervisor -v
+      - name: SCM host lifecycle and descendant termination
+        shell: powershell
+        run: ./tests/windows_scm_checks.ps1 -PythonPath (Get-Command python).Source
+      - name: Build offline client and import without site packages
+        run: python -m scripts.build_client_installer --output dist/windows-client.zip
+      - name: Release content gate
+        run: python -m scripts.verify_release --gate

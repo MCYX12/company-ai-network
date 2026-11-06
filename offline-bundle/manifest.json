@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "generated_at": "2026-10-10T08:24:35.272796+00:00",
+  "python": "3.11.15",
+  "dependencies": {
+    "nats-py": "2.12.0",
+    "jsonschema": "4.25.1",
+    "cryptography": "50.0.2"
+  },
+  "nats_server": {
+    "path": ".runtime/bin/nats-server",
+    "version": "nats-server: v2.11.9",
+    "sha256": "da17f1e330bcfc9790c7a2fc26ae150700edb1a1fa36fe1cb7a0e95af7595bb0"
+  },
+  "pyproject_sha256": "7a3e820bb49f9cccfbc9a4ef5b7de300c0bce70f0fcd6d7cd00f4f2b1233134a",
+  "must_be_available_offline": [
+    "NATS server binary (pinned version + checksum)",
+    "Python dependencies (nats-py / jsonschema / cryptography)",
+    "enterprise CA material on the issuing host and each terminal",
+    "offline root on removable media or HSM (never on the issuing host)"
+  ],
+  "known_gaps": [
+    "internal model / weights (answers currently use an external model API)",
+    "offline IAM / SSO, DNS, NTP and artifact mirror"
+  ]
+}

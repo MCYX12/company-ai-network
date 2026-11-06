@@ -1,0 +1,17 @@
+[Unit]
+Description=Company Agent proxy-isolated local forwarder (user service)
+After=network-online.target
+
+[Service]
+Type=simple
+# Replace <服务器IP> and the interface list for this site.
+ExecStart=%h/company-ai-network/.venv/bin/python -m scripts.local_forwarder --host <服务器IP> --port 14222 --listen-port 14223 --iface <网卡1> --iface <网卡2>
+WorkingDirectory=%h/company-ai-network
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
