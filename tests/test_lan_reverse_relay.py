@@ -44,7 +44,7 @@ class LanRelayTests(unittest.TestCase):
 
     def test_route_mismatch_multiple_routes_and_bad_source_rejected(self):
         for route in ([dict(self.route[0], dst='10.0.0.1')], self.route * 2,
-                      [dict(self.route[0], prefsrc='10.0.0.60')]):
+                      [dict(self.route[0], prefsrc='100.64.0.2')]):
             with self.subTest(route=route), self.assertRaises(ValueError): self.build(route=route)
 
     def test_other_listener_and_unknown_config_rejected(self):
