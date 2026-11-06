@@ -26,7 +26,7 @@
     "name": "company-agent-offline",
     "digest": null
   },
-  "git_commit": "8238678",
+  "git_commit": "e810c7a",
   "source_sha256": {
     ".dockerignore": "029c01f1bef5e584a3aedb601f7cf92eb51a2871239ce16ef3f6a03d246b20e2",
     ".github/workflows/ci.yml": "e0386b84f6643bab7614442ae45eda0d81288b9945a510f1ef69e0221e529481",
@@ -345,7 +345,7 @@
     "tests/test_kv_quota.py": "95b443f6ef2d5ba617e48d1da911cc00daa91f2bdeaa7c04e67af5e06f10aaa1",
     "tests/test_kv_retry.py": "a0057f2daa27cf359dea87f32d37c494f301055b19059dbc2c37bcb4013c87d3",
     "tests/test_kv_task_store.py": "1d6628129952bfd08145e0d4b2313cda31d62f411453ad8df1b6b94aca6fb656",
-    "tests/test_lan_reverse_relay.py": "3028cde23b9c849b6bf2c9c33946e80e7ffac6d9d9f7d5e72b3aa0c389c9cfe2",
+    "tests/test_lan_reverse_relay.py": "341268bbcc7a5f5202ffa03356ad978c7afd487708e0a9c111e07f6a87da0a1d",
     "tests/test_lease.py": "950727bded212ed1ab3ebeee1b9c19e5797f881373ac42be3ced15f289707908",
     "tests/test_lease_router.py": "65ec5257b2fe79c0593bbc7e2b3b41c5cd9ff798b11461b47f3bf79f654242ea",
     "tests/test_load_capacity_thresholds.py": "71c817d8861af1b420573f0d7a33f25b8c6c42682dd0f5a5df64cccbd6d81d26",
