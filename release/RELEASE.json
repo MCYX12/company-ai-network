@@ -26,7 +26,7 @@
     "name": "company-agent-offline",
     "digest": null
   },
-  "git_commit": "66cc27f",
+  "git_commit": "910d4a4",
   "source_sha256": {
     ".dockerignore": "029c01f1bef5e584a3aedb601f7cf92eb51a2871239ce16ef3f6a03d246b20e2",
     ".github/workflows/ci.yml": "e0386b84f6643bab7614442ae45eda0d81288b9945a510f1ef69e0221e529481",
@@ -107,7 +107,7 @@
     "docs/ACCEPTANCE_MATRIX.md": "2ee6de34397e624aa14f068c25b819dbfe52b915aa57d240b7774d2ba0fcb9b8",
     "docs/ARCHITECTURE.md": "e648894c61d83da421bb4242913335538d3299fe1f499236c7e911c5658492ce",
     "docs/BASELINE.md": "8c0e3ec5342c989ece0d3b9ab4adbd8ce80c17286d0637fa06d36fd740984453",
-    "docs/DEPLOYMENT.md": "c60f4c498c0391b1fb00fe88a517eeac152aa0d4efc0c3be1e6dee16cadaf0c1",
+    "docs/DEPLOYMENT.md": "15ece63df00e22b634e09186e29c53b2c9d8213c1d4fe37f696546749e875fdb",
     "docs/OPERATIONS.md": "40c01f8a835d4b10a67c5abf838ccda7bf3cf45a23d76da7166e4cd4d2f8d6aa",
     "docs/PLAN_STATUS.md": "25c36cb382a6d166aab3b35a2c974f42ff9c7a6b6deffe5598bf4668354ff1a5",
     "docs/REMAINING_WORK.md": "6b2b0d75f53e6e2d7e27710c6f1bc4e8341cc916042b35485a579d2819ed28a9",
@@ -151,7 +151,7 @@
     "scripts/auto_renew.py": "08c84cdc01f91e091e3b3899eabbeacc105e495a1ed3531c95346266d9bd0b3c",
     "scripts/bench_business.py": "9637d743bb04e7e43e344d1a2c6c9cc57162c060ad49f8aa566fd12d32bbeca0",
     "scripts/bind_admin_identity.py": "e3fce975549cd1ad36b448140aa6b5c7eb8d24613e9dc6a89882c13bf4c5a1a3",
-    "scripts/bootstrap.py": "4d6d8d7ad50814caff490d3465f336c78ab25a5e3deccc9fd8b9d94c6109997e",
+    "scripts/bootstrap.py": "112aa01b5ef8ba9b2031d76301f4c91c047434ee3aba7a6dd01b6d868d181ef7",
     "scripts/browser_acceptance.py": "99297fa9c58b28b02ec6ee7c2469d4804656b710fd77430ec18629be85b8c8e2",
     "scripts/build_client_installer.py": "8b9b5aed9095b841c91e17dcaafcf7fba12d9106a32e6f24e8863cd1b05d378d",
     "scripts/build_facts.py": "a4ad66ecee3608fe3702c6765825b7dc95ec1c3283a4032083d04285593f962e",
