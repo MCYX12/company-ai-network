@@ -1,32 +1,42 @@
-# 企业内网 Agent 协作平台
-
 <p align="center">
-  <img alt="Offline checks" src="https://github.com/MCYX12/company-ai-network/actions/workflows/ci.yml/badge.svg?branch=main">
-  <img alt="Windows offline client" src="https://github.com/MCYX12/company-ai-network/actions/workflows/windows-client.yml/badge.svg?branch=main">
-  <img alt="Python 3.11" src="https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white">
-  <img alt="NATS 2.11.9" src="https://img.shields.io/badge/NATS-2.11.9-27AAE1?style=for-the-badge">
-  <img alt="mTLS" src="https://img.shields.io/badge/mTLS-identity-005571?style=for-the-badge">
-  <img alt="OIDC / JWT" src="https://img.shields.io/badge/OIDC%2FJWT-auth-4B32C3?style=for-the-badge">
-  <img alt="JetStream" src="https://img.shields.io/badge/JetStream-durable-27AAE1?style=for-the-badge">
-  <img alt="Linux and Windows" src="https://img.shields.io/badge/Linux%20%7C%20Windows-client-333333?style=for-the-badge&amp;logo=linux&amp;logoColor=white">
-  <img alt="1036 tests" src="https://img.shields.io/badge/tests-1036%20passing-brightgreen?style=for-the-badge">
-  <img alt="Status PoC" src="https://img.shields.io/badge/status-PoC-orange?style=for-the-badge">
-  <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge">
+  <img src="docs/assets/banner.png" alt="Company AI Network" width="100%">
 </p>
 
-**CI**：[Linux 离线检查](https://github.com/MCYX12/company-ai-network/actions/workflows/ci.yml) · [Windows 客户端](https://github.com/MCYX12/company-ai-network/actions/workflows/windows-client.yml) · 当前 `main` 全绿
+<p align="center">
+  <a href="https://github.com/MCYX12/company-ai-network/actions/workflows/ci.yml"><img src="https://github.com/MCYX12/company-ai-network/actions/workflows/ci.yml/badge.svg?branch=main" alt="Linux offline checks"></a>
+  <a href="https://github.com/MCYX12/company-ai-network/actions/workflows/windows-client.yml"><img src="https://github.com/MCYX12/company-ai-network/actions/workflows/windows-client.yml/badge.svg?branch=main" alt="Windows client"></a>
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11">
+  <img src="https://img.shields.io/badge/NATS-2.11.9-27AAE1?style=flat-square" alt="NATS 2.11.9">
+  <img src="https://img.shields.io/badge/mTLS-X.509-005571?style=flat-square" alt="mTLS">
+  <img src="https://img.shields.io/badge/OIDC%2FJWT-JWKS-4B32C3?style=flat-square" alt="OIDC / JWT">
+  <img src="https://img.shields.io/badge/JetStream-durable-27AAE1?style=flat-square" alt="JetStream">
+  <img src="https://img.shields.io/badge/tests-1036%20passing-22c55e?style=flat-square" alt="1036 tests">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-22c55e?style=flat-square" alt="MIT"></a>
+  <img src="https://img.shields.io/badge/status-PoC-orange?style=flat-square" alt="PoC">
+  <a href="https://github.com/MCYX12/company-ai-network/releases/tag/v0.9.0-poc.11"><img src="https://img.shields.io/badge/release-v0.9.0--poc.11-0ea5e9?style=flat-square" alt="Release"></a>
+</p>
 
-在纯内网环境中，用 mTLS 身份、最小权限和可审计的投递链路，让员工跨电脑询问项目进展与当前工作。
+<p align="center">
+  <strong>纯内网 · 身份先行 · 最小权限 · 可审计投递</strong><br>
+  <sub>mTLS 身份 · JetStream 持久任务 · 只读业务动作 · 企业内网 PoC / 受控试用基线</sub>
+</p>
 
-**当前定位**：可运行的企业内网 PoC / 受控试用基线。工程实现与受控环境验证基本完成；**企业生产准入尚未通过**（`production_ready=false`）。现场门禁见 [验收矩阵](docs/ACCEPTANCE_MATRIX.md) 与 [剩余工作](docs/REMAINING_WORK.md)。
+---
 
+> [!WARNING]
+> **企业生产准入尚未通过**（`production_ready=false`）。工程实现与受控环境验证基本完成；测试通过、CI 全绿和历史证据都不等于企业生产就绪。现场门禁见 [验收矩阵](docs/ACCEPTANCE_MATRIX.md) 与 [剩余工作](docs/REMAINING_WORK.md)。
+>
 > 公开仓库只包含源码、文档、测试和示例配置；验收证据、现场地址、证书、私钥和运行数据库不随仓库发布。
 
-## 项目是什么
+| 离线回归 | Windows 客户端 | 目录查询 P95 | 跨网段稳定性 |
+| :---: | :---: | :---: | :---: |
+| **1036 / 1036** | **39 / 39** | **25.3 ms** | **108 / 108** |
+
+## 项目简介
 
 企业里的项目状态通常散落在聊天记录、文档和个人电脑里。员工想知道“这个项目到哪了”“对方现在在做什么”，往往要打断别人、翻历史消息，或者把资料发到公网模型上。
 
-本项目把这条链路收敛为：
+本项目把这条链路收敛为五条硬约束：
 
 1. **身份先行**：终端用 mTLS 证书接入，证书映射到唯一 Agent 身份；每个身份只能发布/订阅自己的 subject。
 2. **默认拒绝**：项目、动作、资料范围都要显式授权；越权请求在 Router 侧被拒绝，不依赖模型“自觉”。
@@ -39,27 +49,14 @@
 ## 核心能力
 
 | 能力 | 当前实现 |
-|---|---|
-| 传输与身份 | 真实 NATS 2.11.9；mTLS；证书映射身份；每 Agent subject ACL；短期重放拒绝；自动重连 |
-| 授权与身份治理 | 项目范围默认拒绝；OIDC/JWT + JWKS；在职名册；人工撤权优先且粘滞；授权依赖不可读时 fail-closed |
-| 可靠任务 | 持久任务账本；幂等提交；outbox；重试与死信；JetStream 持久派发；租约/fencing |
-| 业务动作 | `get_status`（执行/待回传状态）、`get_project_progress`（项目记录）、`ask_peer`（受控问答） |
-| 项目记录 | 机器观测、人工确认、发布时间三个时钟分离；来源、快照和新鲜度可见；自动刷新不替代人工确认 |
-| 终端 | Ubuntu CLI / 控制台；Windows V43 客户端；跨网段受限 SSH 反向转发；macOS 端本轮冻结 |
-| 运维 | 健康检查、告警落盘、JSONL 审计、在线备份/恢复、灾备演练、发布门禁 |
-
-## 技术栈
-
-| 层 | 技术选型 | 作用 |
-|---|---|---|
-| 传输 | NATS 2.11.9 · mTLS · subject ACL | 私有网络内的认证消息总线，按身份隔离发布/订阅 |
-| 身份 | X.509 · OIDC/JWT · JWKS | 证书映射 Agent 身份；企业令牌映射员工在职状态 |
-| 可靠投递 | JetStream · SQLite · 共享 KV | 持久任务、幂等键、outbox、租约、死信 |
-| 运行时 | Python 3.11 · systemd · Windows SCM | Linux / Windows 终端的服务化运行 |
-| 观测 | JSONL 审计 · 健康检查 · 告警落盘 | 任务、授权、结果边界可追溯 |
-| 发布 | 双 CI · SHA256 · 客户端签名 | 从零构建、内容摘要校验、产物可复核 |
-
-**关键词**：`mTLS` · `X.509` · `OIDC/JWT` · `JWKS` · `NATS` · `JetStream` · `SQLite WAL` · `outbox` · `idempotency` · `DLQ` · `fencing` · `OCSP/CRL` · `RBAC` · `WORM` · `RTO/RPO`
+| --- | --- |
+| **传输与身份** | 真实 NATS 2.11.9；mTLS；证书映射身份；每 Agent subject ACL；短期重放拒绝；自动重连 |
+| **授权与身份治理** | 项目范围默认拒绝；OIDC/JWT + JWKS；在职名册；人工撤权优先且粘滞；授权依赖不可读时 fail-closed |
+| **可靠任务** | 持久任务账本；幂等提交；outbox；重试与死信；JetStream 持久派发；租约 / fencing |
+| **业务动作** | `get_status`（执行 / 待回传状态）、`get_project_progress`（项目记录）、`ask_peer`（受控问答） |
+| **项目记录** | 机器观测、人工确认、发布时间三个时钟分离；来源、快照和新鲜度可见 |
+| **终端** | Ubuntu CLI / 控制台；Windows V43 客户端；跨 Wi-Fi 受限 SSH 反向转发；macOS 端本轮冻结 |
+| **运维** | 健康检查、告警落盘、JSONL 审计、在线备份 / 恢复、灾备演练、发布门禁 |
 
 ## 架构
 
@@ -79,10 +76,14 @@ flowchart LR
     CA[企业 CA / OCSP] -.签发与撤销.-> U
 ```
 
-- **NATS** 只暴露私有网络地址，测试环境默认监听 `127.0.0.1:14222`。
-- **Router** 是业务授权和任务状态的权威入口；客户端不能直接向 Worker 派发。
-- **Agent / Worker** 只读已授权项目资料；模型调用前后都重新检查授权。
-- **管理控制台** 通过管理员身份访问审批、成员、项目记录和健康状态。
+| 组件 | 职责 | 关键实现 |
+| --- | --- | --- |
+| **NATS** | 私有网络消息总线 | 只暴露私有地址，测试环境默认 `127.0.0.1:14222`；mTLS + subject ACL |
+| **Router** | 业务授权与任务状态权威入口 | 身份映射、项目/动作/资料范围、幂等键、重试；客户端不能直接派发 Worker |
+| **Agent / Worker** | 只读资料与模型调用 | 模型调用前后都重新检查授权；输出带来源与快照 |
+| **任务账本** | 持久化与恢复 | SQLite WAL、outbox、租约 / fencing、DLQ |
+| **IAM** | 身份与在职状态 | OIDC/JWT + JWKS、名册、撤权粘滞、fail-closed |
+| **控制台** | 运维与审批 | 管理员访问审批、成员、项目记录与健康状态 |
 
 ### 请求生命周期
 
@@ -114,6 +115,7 @@ sequenceDiagram
 
 ```mermaid
 stateDiagram-v2
+    direction LR
     [*] --> accepted
     accepted --> queued
     queued --> dispatched
@@ -128,6 +130,19 @@ stateDiagram-v2
     expired --> [*]
     cancelled --> [*]
 ```
+
+## 技术栈
+
+| 层 | 技术选型 | 作用 |
+| --- | --- | --- |
+| 传输 | NATS 2.11.9 · mTLS · subject ACL | 私有网络内的认证消息总线，按身份隔离发布/订阅 |
+| 身份 | X.509 · OIDC/JWT · JWKS | 证书映射 Agent 身份；企业令牌映射员工在职状态 |
+| 可靠投递 | JetStream · SQLite WAL · 共享 KV | 持久任务、幂等键、outbox、租约、死信 |
+| 运行时 | Python 3.11 · systemd · Windows SCM | Linux / Windows 终端的服务化运行 |
+| 观测 | JSONL 审计 · 健康检查 · 告警落盘 | 任务、授权、结果边界可追溯 |
+| 发布 | 双 CI · SHA256 · 客户端签名 | 从零构建、内容摘要校验、产物可复核 |
+
+**关键词**：`mTLS` · `X.509` · `OIDC/JWT` · `JWKS` · `NATS` · `JetStream` · `SQLite WAL` · `outbox` · `idempotency` · `DLQ` · `fencing` · `OCSP/CRL` · `RBAC` · `WORM` · `RTO/RPO`
 
 ## 快速开始（本机 PoC）
 
@@ -159,11 +174,10 @@ uv sync --frozen
 .venv/bin/python -m app.client --action get_status --target ag-b
 ```
 
-越权演示（`ag-c` 不属于 `ag-b` 的项目范围）：
+越权演示（`ag-c` 不属于 `ag-b` 的项目范围，预期 `code=FORBIDDEN`）：
 
 ```bash
 .venv/bin/python -m app.client --identity ag-c
-# 预期 code=FORBIDDEN
 ```
 
 启动本机控制台：
@@ -175,7 +189,7 @@ POC_RUNTIME=.runtime NATS_URL="$(cat .runtime/endpoint.txt)" \
 
 浏览器打开 <http://127.0.0.1:8787>。按 `Ctrl-C` 只会停止 `run_local.py` 自己启动的进程。
 
-> 局域网/Windows 部署、证书和反向转发见 [部署指南](docs/DEPLOYMENT.md)；不要把测试 CA 或 `.runtime` 目录分发给终端。
+> 局域网 / Windows 部署、证书和反向转发见 [部署指南](docs/DEPLOYMENT.md)；不要把测试 CA 或 `.runtime` 目录分发给终端。
 
 ## 控制台
 
@@ -183,44 +197,42 @@ POC_RUNTIME=.runtime NATS_URL="$(cat .runtime/endpoint.txt)" \
 
 *管理员审批、对话、任务状态、项目资料与健康检查在同一控制台；授权撤销或到期后，相关历史结果不可再读。截图为受控环境实机验收。*
 
-## 验证
+## 实测指标
 
-完整离线回归（需要已准备的 `.runtime/bin/nats-server`）：
+| 测量项 | 结果 | 条件 |
+| --- | --- | --- |
+| 离线回归 | **1036 / 1036** | Linux · Python 3.11 |
+| Windows 客户端 | **39 / 39** | GitHub Windows runner |
+| 跨网段稳定性 | **108 / 108** 查询成功 | 180 秒 · 5 秒间隔 |
+| 目录查询 P95 | **25.3 ms** | 2026-10-10 当前环境 |
+| Windows 状态 P95 | **186.4 ms** | 同上 |
+| 项目进展 P95 | **43.9 ms** | 同上 |
+| 转发故障自动恢复 | **13.6 秒** | 强制结束转发主进程后 |
 
-```bash
-.venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+> 以上是当前开发环境的单次工程样本，用于可重复自证，不是 SLA，也不是企业容量 / 生产验收。容量目标与现场证据要求见 [验收矩阵](docs/ACCEPTANCE_MATRIX.md) 和 [剩余工作](docs/REMAINING_WORK.md)。
+
+## 当前状态与边界
+
+| 维度 | 状态 |
+| --- | --- |
+| 工程实现 | 可运行；1036 项回归通过；Linux / Windows CI 全绿；发布门禁完整 |
+| 受控环境验证 | Ubuntu 与 Windows 双向状态 / 项目进展查询；跨网段受限反向转发；180 秒稳定性采样 |
+| 企业生产准入 | **未通过**：真实 IdP、物理三故障域 + 双 Router、真实内网模型断公网冷启动、100 QPS 容量、不可变审计、异地 DR、50–200 人试点、三方签字均待现场完成 |
+
+当前版本适合本机 PoC、受控试用和现场准入准备，**不应直接承载生产业务**。
+
+## 仓库结构
+
+```text
+app/           Router、Agent/Worker、授权、IAM、任务账本、审计、控制台
+scripts/       启动、证书、NATS 准备、发布、备份与演练工具
+tests/         1036 项离线回归与真实中间件集成演练
+docs/          基线、验收、生产准入、运维和现场清单
+schemas/       严格请求 JSON Schema
+packaging/     systemd / Windows / launchd 部署模板
+web/           控制台前端资源
+config/        站点 profile、身份目录和示例配置
 ```
-
-当前基线：**1036 项通过**；两个 CI 工作流同时覆盖 Linux 离线检查和 Windows 客户端。CI 从零安装固定版 NATS 并校验 SHA256，不依赖提交进仓库的运行时目录。
-
-真实中间件集成验收（会启动独立的 NATS / Router / Agent，结束后清理）：
-
-```bash
-.venv/bin/python tests/integration.py
-```
-
-发布校验：
-
-```bash
-# 本机已准备运行时：提交、内容摘要、制品和公开源卫生一起校验
-.venv/bin/python -m scripts.verify_release --strict
-
-# 全新 clone / CI：允许暂缓缺失 NATS 二进制，但不放宽源码与清单校验
-.venv/bin/python -m scripts.verify_release --gate
-```
-
-## 目录结构
-
-| 路径 | 内容 |
-|---|---|
-| `app/` | Router、Agent/Worker、授权、IAM、任务账本、审计、控制台等核心模块 |
-| `scripts/` | 启动、证书、NATS 准备、发布、备份与演练工具 |
-| `tests/` | 1036 项离线回归与真实中间件集成演练 |
-| `docs/` | 基线、验收、生产准入、运维和现场清单 |
-| `schemas/` | 严格请求 JSON Schema |
-| `packaging/` | systemd / Windows / launchd 部署模板 |
-| `web/` | 控制台前端资源 |
-| `config/` | 站点 profile、身份目录和示例配置 |
 
 ## 安全与隐私
 
@@ -230,34 +242,28 @@ POC_RUNTIME=.runtime NATS_URL="$(cat .runtime/endpoint.txt)" \
 - 生产密钥应放在所有者独占目录或 HSM；不要通过 Git、聊天或工单传递。
 - 当前业务动作均为只读；模型输出经过授权检查和出口校验，不把未授权资料带入提示词。
 
-## 实测指标
+## 验证与 CI
 
-| 测量项 | 结果 | 条件 |
-|---|---|---|
-| 离线回归 | **1036 / 1036** | Linux · Python 3.11 |
-| Windows 客户端 | **39 / 39** | GitHub Windows runner |
-| 跨网段稳定性 | **108 / 108** 查询成功 | 180 秒 · 5 秒间隔 |
-| 目录查询 P95 | **25.3 ms** | 2026-10-10 当前环境 |
-| Windows 状态 P95 | **186.4 ms** | 同上 |
-| 项目进展 P95 | **43.9 ms** | 同上 |
-| 转发故障自动恢复 | **13.6 秒** | 强制结束转发主进程后 |
+```bash
+# 完整离线回归（需要已准备的 .runtime/bin/nats-server）
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py'
 
-> 以上是当前开发环境的单次工程样本，用于可重复自证，不是 SLA，也不是企业容量/生产验收。容量目标与现场证据要求见 [验收矩阵](docs/ACCEPTANCE_MATRIX.md) 和 [剩余工作](docs/REMAINING_WORK.md)。
+# 真实中间件集成验收（启动独立 NATS / Router / Agent，结束后清理）
+.venv/bin/python tests/integration.py
 
-## 当前状态与边界
+# 发布校验：本机已准备运行时
+.venv/bin/python -m scripts.verify_release --strict
 
-| 维度 | 状态 |
-|---|---|
-| 工程实现 | 可运行；1036 项回归通过；Linux / Windows CI 全绿；发布门禁完整 |
-| 受控环境验证 | Ubuntu 与 Windows 双向状态/项目进展查询；跨网段受限反向转发；180 秒稳定性采样 |
-| 企业生产准入 | **未通过**：真实 IdP、物理三故障域 + 双 Router、真实内网模型断公网冷启动、100 QPS 容量、不可变审计、异地 DR、50–200 人试点、三方签字均待现场完成 |
+# 全新 clone / CI：允许暂缓缺失 NATS 二进制，但不放宽源码与清单校验
+.venv/bin/python -m scripts.verify_release --gate
+```
 
-这意味着：**测试通过、CI 全绿和历史证据，都不等于企业生产就绪。** 当前版本适合本机 PoC、受控试用和现场准入准备，不应直接承载生产业务。
+两个 CI 工作流同时覆盖 Linux 离线检查和 Windows 客户端；CI 从零安装固定版 NATS 并校验 SHA256，不依赖提交进仓库的运行时目录。
 
 ## 文档
 
 | 文档 | 用途 |
-|---|---|
+| --- | --- |
 | [架构说明](docs/ARCHITECTURE.md) | 组件、请求路径、任务状态和部署拓扑 |
 | [部署指南](docs/DEPLOYMENT.md) | 本机、局域网、Windows 与跨网段部署 |
 | [安全模型](docs/SECURITY.md) | 身份、授权、模型边界、审计和威胁模型 |
@@ -272,6 +278,6 @@ POC_RUNTIME=.runtime NATS_URL="$(cat .runtime/endpoint.txt)" \
 
 欢迎通过 Issue 或 Pull Request 提交问题、文档修正和可复现的测试。涉及安全问题的细节请先私下联系维护者，不要在公开 Issue 中粘贴密钥、内网地址或业务资料。
 
-## License
+## 许可
 
-[MIT](LICENSE)
+[MIT](LICENSE)。
